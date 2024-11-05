@@ -2,11 +2,11 @@
 
 import pymysql
 
-db = pymysql.connector.connect(
+db = pymysql.connect(
     host="localhost",
     user="root",
-    password="Password",
-    database="bug_tracking"
+    password="tanya",
+    database="bug_tracking_system"
 )
 
 
@@ -23,7 +23,7 @@ def print_login_model():
     elif choice == "2":
         customer_login()
     elif choice == "3":
-        create_account()
+        create_account_cus()
     else:
         print("Invalid Input Retry!")
         print_login_model()
@@ -128,7 +128,7 @@ def view_customers():
             print(s1.format(str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]), str(row[5])))
         print("------------------------------------------------------------------------------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while viewing customer list ", err)
 
 
@@ -152,7 +152,7 @@ def customer_search_by_name():
             print(s1.format(str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]), str(row[5])))
         print("------------------------------------------------------------------------------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while searching customer by name ", err)
 
 
@@ -176,7 +176,7 @@ def customer_search_by_login_id():
             print(s1.format(str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]), str(row[5])))
         print("------------------------------------------------------------------------------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while searching customer by Login ID ", err)
 
 # 2. Manage Employee (Add, View, Search, Edit, Activate/Deactivate)
@@ -201,7 +201,7 @@ def add_new_admin_or_expert():
     cursor = db.cursor()
     try:
         p = input("Enter Employee Login ID : ")
-        q = input("Enter employee password : ")
+        q = input("Enter Employee password : ")
         r = input("Enter Employee Type : ")
         s = input("Enter Employee Name :")
         t = input("Enter Employee contact no. :")
@@ -215,7 +215,7 @@ def add_new_admin_or_expert():
         cursor.execute(query)
         db.commit()
         print("Employee added successfully")
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while inserting new employee ", err)
 
 
@@ -241,7 +241,7 @@ def view_all_employees():
         print("-------------------------------------------------------------------------------------------------------"
               "---------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while viewing all employee ", err)
 
 
@@ -269,7 +269,7 @@ def employee_search_by_name():
         print("-------------------------------------------------------------------------------------------------------"
               "---------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while searching employee by name ", err)
 
 
@@ -296,7 +296,7 @@ def employee_search_by_login_id():
         print("-------------------------------------------------------------------------------------------------------"
               "---------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while searching employee by Login ID ", err)
 
 
@@ -323,7 +323,7 @@ def employee_search_by_employee_type():
         print("-------------------------------------------------------------------------------------------------------"
               "---------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while searching employee by type", err)
 
 
@@ -340,7 +340,7 @@ def employee_status_update():
         cursor.execute(query)
         db.commit()
         print('Employee Status Updated successfully')
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while updating status", err)
         db.close()
 
@@ -358,7 +358,7 @@ def change_password_admin():
         cursor.execute(query, (z, y))
         db.commit()
         print("Password changed successfully")
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while updating password", err)
 
 #  Bug Services -  Manage Bug( View, Search, AssignBugToExpert )
@@ -401,7 +401,7 @@ def view_all_bugs():
         print("-------------------------------------------------------------------------------------------------------"
               "-------------------------------------------------------------------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while fetching Bug Table", err)
 
 
@@ -431,7 +431,7 @@ def bug_search_by_bug_id():
         print("-------------------------------------------------------------------------------------------------------"
               "-------------------------------------------------------------------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while fetching Bug details using Bug ID:", err)
 
 
@@ -461,7 +461,7 @@ def bug_search_by_bug_status():
         print("-------------------------------------------------------------------------------------------------------"
               "-------------------------------------------------------------------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while fetching Bug details using Bug Status:", err)
 
 
@@ -491,7 +491,7 @@ def bug_search_by_customer_login_id():
         print("-------------------------------------------------------------------------------------------------------"
               "-------------------------------------------------------------------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while fetching Bug details using Bug ID ", err)
 
 
@@ -510,7 +510,7 @@ def assign_bug_expert():
         # Execute the query
         cursor.execute(query)
         db.commit()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while fetching Bug details using Bug ID:", err)
 
 
@@ -518,7 +518,6 @@ def logout():
     print_login_model()
 
 # EXPERT MODULE
-
 
 def expert_module():
     print("Expert Module : ")
@@ -568,7 +567,7 @@ def view_assigned_bug():
         print("-------------------------------------------------------------------------------------------------------"
               "-------------------------------------------------------------------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while fetching Assigned Bug details. ", err)
 
 
@@ -599,7 +598,7 @@ def filter_assigned_bugs_based_on_status():
         print("-------------------------------------------------------------------------------------------------------"
               "-------------------------------------------------------------------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while fetching Bug details using Bug Status.", err)
 
 
@@ -617,7 +616,7 @@ def solve_the_bug():
         query = f"UPDATE Bug SET solution = '{z}', bugSolvedDate = '{bugsolvedate}' WHERE bugId = '{x}' "
         # Execute the query
         cursor.execute(query)
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while Updating Bug Solution.", err)
 
 
@@ -634,13 +633,11 @@ def change_password_expert():
         # Execute the query
         cursor.execute(query)
         print("Password changed successfully")
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while updating password:", err)
 
 
 # CUSTOMER MODULE
-
-
 def customer_module():
     print("Customer Module : ")
     while True:
@@ -685,7 +682,7 @@ def customer_module():
         logout()
 
 
-def create_account():
+def create_account_cus():
     print("Creating new account:")
     # Create a cursor to execute SQL queries
     cursor = db.cursor()
@@ -704,7 +701,7 @@ def create_account():
         cursor.execute(query)
         db.commit()
         print("Account created Successfully")
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while creating new account. ", err)
 
 
@@ -732,7 +729,7 @@ def update_login_id():
         # Execute the query
         cursor.execute(query)
         print("Login Id Updated Successfully")
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while updating customer Login ID. ", err)
 
 
@@ -749,7 +746,7 @@ def update_name():
         # Execute the query
         cursor.execute(query)
         print("Name Updated Successfully")
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while updating name. ", err)
 
 
@@ -766,7 +763,7 @@ def update_age():
         # Execute the query
         cursor.execute(query)
         print("Age Updated Successfully")
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while updating Age. ", err)
 
 
@@ -783,7 +780,7 @@ def update_contact_number():
         # Execute the query
         cursor.execute(query)
         print("Contact Number Updated Successfully")
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while updating contact number. ", err)
 
 
@@ -800,7 +797,7 @@ def update_email():
         # Execute the query
         cursor.execute(query)
         print("Email Id Updated Successfully")
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while updating email. ", err)
 
 
@@ -819,7 +816,7 @@ def post_new_bug():
         cursor.execute(query)
         db.commit()
         print("Bug posted successfully!")
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while posting new bug. ", err)
 
 
@@ -849,7 +846,7 @@ def view_all_bugs_customer():
         print("-------------------------------------------------------------------------------------------------------"
               "-------------------------------------------------------------------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while viewing bugs. ", err)
 
 
@@ -880,7 +877,7 @@ def bug_search_by_bug_status_customer():
         print("-------------------------------------------------------------------------------------------------------"
               "-------------------------------------------------------------------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while searching Bug details using Bug Status. ", err)
 
 
@@ -911,7 +908,7 @@ def view_bug_solution():
         print("-------------------------------------------------------------------------------------------------------"
               "-------------------------------------------------------------------------------------")
         cursor.close()
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while viewing Bug Solution. ", err)
 
 
@@ -927,7 +924,7 @@ def change_password():
         query = f"UPDATE customer SET custPassword = '{z}' WHERE custLoginId = '{y}' AND custPassword = '{x}' "
         # Execute the query
         cursor.execute(query)
-    except pymysql.connector.Error as err:
+    except pymysql.connect.Error as err:
         print("Error occurred while updating password. ", err)
 
 
@@ -983,3 +980,4 @@ def customer_login():
 
 
 print_login_model()
+
